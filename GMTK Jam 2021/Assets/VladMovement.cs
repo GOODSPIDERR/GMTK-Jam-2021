@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class VladMovement : MonoBehaviour
 {
     CharacterController controller;
-    public Transform skeleton;
+
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public float movementSpeed = 5f;
     Vector3 velocity;
-    bool isGrounded;
+    public bool isGrounded;
     Animator animator;
     void Start()
 
@@ -21,21 +23,34 @@ public class VladMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+    }
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * 5f, 0, Input.GetAxis("Vertical") * Time.deltaTime * 5f);
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        animator.SetBool("isGrounded", isGrounded);
+
+        Debug.Log(isGrounded);
+
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed, 0, Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed);
         float movementMagnitude = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), 0, Mathf.Abs(Input.GetAxis("Vertical")));
 
-        Debug.Log(movementMagnitude);
+        //Debug.Log(movementMagnitude);
 
         controller.Move(movement);
 
         if (movementMagnitude >= 0.1f)
         {
             animator.SetBool("isMoving", true);
-            transform.rotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), 0.5f);
         }
         else
         {
@@ -43,24 +58,20 @@ public class VladMovement : MonoBehaviour
         }
 
 
-        if (isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            animator.SetBool("isGrounded", true);
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-                animator.SetBool("isGrounded", false);
-            }
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 
-        else
-        {
-            animator.SetBool("isGrounded", false);
-        }
 
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, groundDistance);
     }
 }

@@ -11,6 +11,7 @@ public class BallScript : MonoBehaviour
     bool isSliding = false;
     public SphereCollider scrapeTrigger;
     public LayerMask layerMask;
+    public float dragDistance;
 
     void Start()
     {
@@ -21,19 +22,19 @@ public class BallScript : MonoBehaviour
 
     void Update()
     {
-        sparks.position = new Vector3(transform.position.x, transform.position.y - 1.2f, transform.position.z);
+        sparks.position = new Vector3(transform.position.x, transform.position.y - dragDistance, transform.position.z);
         sparks.rotation = Quaternion.LookRotation(rb.velocity);
 
-        Debug.DrawRay(transform.position, Vector3.down * 1.4f, Color.yellow);
+        Debug.DrawRay(transform.position, Vector3.down * dragDistance, Color.yellow);
 
         if (rb.velocity.magnitude >= 5f)
         {
             scrapeTrigger.enabled = true;
 
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down * 1.4f, out hit, 1.4f, layerMask))
+            if (Physics.Raycast(transform.position, Vector3.down * dragDistance, out hit, dragDistance, layerMask))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 isSliding = true;
             }
 
@@ -50,7 +51,7 @@ public class BallScript : MonoBehaviour
             scrapeTrigger.enabled = false;
         }
 
-        Debug.Log(isSliding);
+        //Debug.Log(isSliding);
 
         if (!isSliding)
         {
