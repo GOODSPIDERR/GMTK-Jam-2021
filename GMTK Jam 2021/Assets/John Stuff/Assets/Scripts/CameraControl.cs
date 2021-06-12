@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
         // initialRotation = transform.rotation.eulerAngles;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-		AngleAndLookAtPlayer();
+        AngleAndLookAtPlayer();
     }
 
     void Update()
@@ -25,7 +25,7 @@ public class CameraControl : MonoBehaviour
 
     private void LateUpdate()
     {
-		AngleAndLookAtPlayer();
+        AngleAndLookAtPlayer();
         // transform.Rotate(initialRotation);
         // transform.LookAt(Target);
         
@@ -35,23 +35,23 @@ public class CameraControl : MonoBehaviour
     }
     
     private void AngleAndLookAtPlayer()
-	{
-		Vector3 cameraPosition = transform.position;
-		Vector3 playerPosition = Target.position;
-		
-		float angleX = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.right);
-		float angleY = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.up);
-		float angleZ = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.forward);
-		
-		Debug.Log("angleX: " + angleX);
-		Debug.Log("angleY: " + angleY);
-		Debug.Log("angleZ: " + angleZ);
-		
-		transform.LookAt(Target);
-		
-		Debug.Log("=================");
-		
-	}
+    {
+        Vector3 cameraPosition = transform.position;
+        Vector3 playerPosition = Target.position;
+        
+        float angleX = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.right);
+        float angleY = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.up);
+        float angleZ = Vector3.SignedAngle(cameraPosition, playerPosition, Vector3.forward);
+        
+        Debug.Log("angleX: " + angleX);
+        Debug.Log("angleY: " + angleY);
+        Debug.Log("angleZ: " + angleZ);
+        
+        transform.LookAt(Target);
+        
+        Debug.Log("=================");
+        
+    }
 
     void ViewObstructed()
     {
