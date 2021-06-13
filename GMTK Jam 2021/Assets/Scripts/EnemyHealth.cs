@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(Health);
     }
     
     
@@ -32,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
             if (Health - damage < 0)
             {
                 isDead = true;
+                Destroy(this);
             } 
             else
             {
