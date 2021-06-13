@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - Key
   - BreakableObject
+  - MainCameraCM
   layers:
   - Default
   - TransparentFX

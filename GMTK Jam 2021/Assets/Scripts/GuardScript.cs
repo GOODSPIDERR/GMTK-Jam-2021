@@ -28,7 +28,7 @@ public class GuardScript : MonoBehaviour
     {
         if (agro)
         {
-            if (hearing() > hearingRange && !spotting()) 
+            if (hearing() > hearingRange && !spotting())
             {
                 agro = false;
                 guardAnim.SetBool("agro", false);
@@ -45,21 +45,21 @@ public class GuardScript : MonoBehaviour
         }
         else
         {
-  
-                if (hearing() < (1.5 * hearingRange))
-                {
-                    agro = true;
-                    guardAnim.SetBool("agro", true);
-                    guard.SetDestination(player.transform.position);
-                }
 
-                if (hearing() < (0.5 * hearingRange))
-                {
-                    agro = true;
-                    guardAnim.SetBool("agro", true);
-                    guard.SetDestination(player.transform.position);
-                }
-           
+            if (hearing() < (1.5 * hearingRange))
+            {
+                agro = true;
+                guardAnim.SetBool("agro", true);
+                guard.SetDestination(player.transform.position);
+            }
+
+            if (hearing() < (0.5 * hearingRange))
+            {
+                agro = true;
+                guardAnim.SetBool("agro", true);
+                guard.SetDestination(player.transform.position);
+            }
+
             else
             {
                 if (hearing() < hearingRange)
@@ -127,6 +127,5 @@ public class GuardScript : MonoBehaviour
         Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
         rb.AddForce(targetDir.normalized * pushForce, ForceMode.Impulse);
-
     }
 }
