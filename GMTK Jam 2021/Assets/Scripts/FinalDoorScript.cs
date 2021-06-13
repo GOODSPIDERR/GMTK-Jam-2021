@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class FinalDoorScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] keys;
     void Start()
     {
-        
+        keys = GameObject.FindGameObjectsWithTag("Key");
+
     }
 
     // Update is called once per frame
