@@ -31,17 +31,17 @@ public class BallBehavior : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         int numContacts = other.contactCount;
-        Debug.Log("there are " + numContacts + " contact points!");
+        //Debug.Log("there are " + numContacts + " contact points!");
         Collider objectCollider, ballCollider;
         float ballVelocitySqr;
         
         for (int i = 0; i < numContacts; i++) {
             objectCollider = other.GetContact(i).thisCollider;
-            ballCollider = other.GetContact(i).thisCollider;
+            ballCollider = other.GetContact(i).otherCollider;
             ballVelocitySqr = ballCollider.attachedRigidbody.velocity.sqrMagnitude;
             
-            Debug.Log("objectCollider.tag: " + objectCollider.tag);
-            Debug.Log("ballCollider.tag: " + ballCollider.tag);
+            //Debug.Log("objectCollider.tag: " + objectCollider.tag);
+            //Debug.Log("ballCollider.tag: " + ballCollider.tag);
             
             if (objectCollider.tag == "BreakableObject") // check for breakable object
             {
@@ -50,7 +50,7 @@ public class BallBehavior : MonoBehaviour
                     objectCollider.GetComponent<Break>().isBroken = true;
                 }
             }
-            else if (objectCollider.tag == "Enemy") // check for enemy
+            else if (objectCollider.tag == "Guard") // check for enemy
             {
                 objectCollider.GetComponent<EnemyHealth>().tryToDamage(Mathf.Sqrt(ballVelocitySqr));
             }
