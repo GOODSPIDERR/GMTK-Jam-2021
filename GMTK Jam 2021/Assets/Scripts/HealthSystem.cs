@@ -77,6 +77,7 @@ public class HealthSystem : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Player hit soemthing!");
         if (other.transform.tag == "Guard" && Time.time > lastHit + invlunTime)
         {
             Debug.Log("Player hit guard!");
@@ -88,6 +89,7 @@ public class HealthSystem : MonoBehaviour
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
 
             ShakeCamera(otherRb.velocity.magnitude / 2, 0.5f);
+			lastHit = Time.time;
         }
     }
 
