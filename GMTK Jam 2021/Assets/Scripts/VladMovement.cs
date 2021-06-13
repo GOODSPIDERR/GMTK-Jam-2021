@@ -20,6 +20,8 @@ public class VladMovement : MonoBehaviour
     Animator animator;
     public GameObject ball;
     Rigidbody ballRb;
+    Rigidbody playerRB;
+    Vector3 angularVelocity;
 
     public AudioSource keySound;
     public TMP_Text keyCounterText;
@@ -31,6 +33,10 @@ public class VladMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         ballRb = ball.GetComponent<Rigidbody>();
         keySound = GetComponent<AudioSource>();
+        playerRB = GetComponent<Rigidbody>();
+        angularVelocity = playerRB.angularVelocity;
+
+         //ball is 6.38 metres away
 
     }
 
@@ -56,7 +62,7 @@ public class VladMovement : MonoBehaviour
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed, 0, Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed);
         float movementMagnitude = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), 0, Mathf.Abs(Input.GetAxis("Vertical")));
 
-        Debug.Log(movementMagnitude);
+        //Debug.Log(movementMagnitude);
 
         controller.Move(movement);
 
@@ -82,7 +88,9 @@ public class VladMovement : MonoBehaviour
             //ball.transform.Rotate(0f, 360f * Time.deltaTime, 0f, Space.World);
             Vector3 direction;
             direction = transform.position - ball.transform.position;
-            ballRb.AddForce(-transform.right * 100f, ForceMode.Force);
+            //ballRb.AddForce(-transform.right * 100f, ForceMode.Force);
+            ball.transform.rotation *= Quaternion.Euler(transform.InverseTransformVector(angularVelocity) * Mathf.Rad2Deg * Time.fixedDeltaTime);
+
         }
         if (transform.position.y < -10f) //if you fall off
         {
