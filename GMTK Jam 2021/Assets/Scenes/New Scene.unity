@@ -1413,7 +1413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709a62efaa7da364586c03a91974a1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeleton: {fileID: 1390711383}
   gravity: -9.81
   jumpHeight: 3
   groundCheck: {fileID: 322950961}
@@ -1421,6 +1420,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  movementSpeed: 5
+  isGrounded: 0
+  ball: {fileID: 0}
 --- !u!143 &1390711385
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2715,6 +2717,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  dragDistance: 0
 --- !u!135 &3732893659664424010
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2859,7 +2862,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5df6330e4635ef446a22b246182393b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
