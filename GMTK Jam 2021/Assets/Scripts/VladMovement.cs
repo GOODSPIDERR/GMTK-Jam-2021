@@ -16,6 +16,7 @@ public class VladMovement : MonoBehaviour
     Vector3 velocity;
     public bool isGrounded;
     Animator animator;
+    public GameObject ball;
     void Start()
 
     {
@@ -36,11 +37,11 @@ public class VladMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        Debug.Log(velocity.y);
+        //Debug.Log(velocity.y);
 
         animator.SetBool("isGrounded", isGrounded);
 
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
 
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed, 0, Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed);
         float movementMagnitude = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), 0, Mathf.Abs(Input.GetAxis("Vertical")));
@@ -63,6 +64,13 @@ public class VladMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.Rotate(0.0f, 45F, 0.0f, Space.Self);
+            //ball.transform.Rotate(0.0f, 45F, 0.0f, Space.Self);
+            ball.transform.RotateAround(transform.position, Vector3.up, 20 * Time.deltaTime);
         }
 
 
