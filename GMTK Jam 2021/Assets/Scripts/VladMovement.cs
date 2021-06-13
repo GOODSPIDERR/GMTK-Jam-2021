@@ -22,8 +22,8 @@ public class VladMovement : MonoBehaviour
     Rigidbody ballRb;
     Rigidbody playerRB;
     Vector3 angularVelocity;
+    [SerializeField] SoundEffectManagerScript soundEffects;
 
-    public AudioSource keySound;
     public TMP_Text keyCounterText;
 
     void Start()
@@ -34,6 +34,7 @@ public class VladMovement : MonoBehaviour
         ballRb = ball.GetComponent<Rigidbody>();
         playerRB = GetComponent<Rigidbody>();
         angularVelocity = playerRB.angularVelocity;
+        soundEffects = FindObjectOfType<SoundEffectManagerScript>();
 
         //ball is 6.38 metres away
 
@@ -118,7 +119,7 @@ public class VladMovement : MonoBehaviour
     {
         if (other.transform.tag == "Key")
         {
-            keySound.Play();
+            soundEffects.Key();
             keyCounter++;
             Destroy(other.gameObject);
         }
