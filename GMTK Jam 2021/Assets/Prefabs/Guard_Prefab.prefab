@@ -1732,6 +1732,8 @@ MonoBehaviour:
   lastHit: 0
   isDead: 0
   sliderObject: {fileID: 934775868}
+  ouch: {fileID: 0}
+  dying: {fileID: 0}
 --- !u!54 &5174980803966087937
 Rigidbody:
   m_ObjectHideFlags: 0

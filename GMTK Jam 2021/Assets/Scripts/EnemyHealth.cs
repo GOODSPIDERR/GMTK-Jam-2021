@@ -21,6 +21,8 @@ public class EnemyHealth : MonoBehaviour
     CinemachineVirtualCamera mainCamera;
     public GameObject sliderObject;
     Slider slider;
+    public AudioSource ouch;
+    public AudioSource dying;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,8 @@ public class EnemyHealth : MonoBehaviour
         guardScript = GetComponent<GuardScript>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
         slider = sliderObject.GetComponent<Slider>();
+
+        dying = FindObjectOfType<AudioSource>(CompareTag("GuardSound"));
     }
 
     // Update is called once per frame
@@ -40,6 +44,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (Health <= 0f)
         {
+            dying.Play();
             Die();
         }
         // Debug.Log(Health);
@@ -58,7 +63,9 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
+                //ouch.Play();
                 Health -= damage;
+
             }
         }
     }
