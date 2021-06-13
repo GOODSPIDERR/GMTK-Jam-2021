@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class VladMovement : MonoBehaviour
 {
@@ -14,17 +15,23 @@ public class VladMovement : MonoBehaviour
     public LayerMask groundMask;
     public float movementSpeed = 5f;
     Vector3 velocity;
-    int keyCounter = 0;
+    public int keyCounter = 0;
     public bool isGrounded;
     Animator animator;
     public GameObject ball;
     Rigidbody ballRb;
+
+    public AudioSource keySound;
+    public TMP_Text keyCounterText;
+
     void Start()
 
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         ballRb = ball.GetComponent<Rigidbody>();
+        keySound = GetComponent<AudioSource>();
+
     }
 
 
@@ -85,6 +92,13 @@ public class VladMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        UpdateKeyCounter();
+    }
+
+    public void UpdateKeyCounter()
+    {
+        keyCounterText.text = "Keys:" + keyCounter;
     }
 
     void OnDrawGizmos()
@@ -97,6 +111,7 @@ public class VladMovement : MonoBehaviour
     {
         if (other.transform.tag == "Key")
         {
+            keySound.Play();
             keyCounter++;
             Destroy(other.gameObject);
         }
