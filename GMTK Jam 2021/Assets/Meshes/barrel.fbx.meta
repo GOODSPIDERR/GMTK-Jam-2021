@@ -1,26 +1,18 @@
 fileFormatVersion: 2
-guid: 173799047bc272449a806415c2743f83
+guid: 01aba07bc2e91424caf6ef71f9886932
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: -825781399091857089
-    second: metarig.002|metarig.002|metarig.002|metarig.002|mixamo.com|Layer0|metarig.0
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Shiny Gold
-    second: {fileID: 2100000, guid: 5df6330e4635ef446a22b246182393b3, type: 2}
+      name: Material.002
+    second: {fileID: 2100000, guid: 7219ff6080e844f41a15b82548a32127, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: blue latex
-    second: {fileID: 2100000, guid: 1dc9411abc346bd4687fa3ee11469979, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: weapons.001
+      name: Material.004
     second: {fileID: 2100000, guid: 5df6330e4635ef446a22b246182393b3, type: 2}
   materials:
     materialImportMode: 2
