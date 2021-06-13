@@ -1830,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b4e204a89ab844b8cfc0d016ccff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallBreak: {fileID: 0}
 --- !u!64 &123842377
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5279,9 +5280,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 608337ded75b58e49ba5babf62e58793, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.532
+  m_Volume: 0.24
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5500,6 +5501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b4e204a89ab844b8cfc0d016ccff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallBreak: {fileID: 0}
 --- !u!1 &381043624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -578899004779414152, guid: 0818247b12054374193efbce0b3c2fc5, type: 3}
@@ -8023,6 +8025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b4e204a89ab844b8cfc0d016ccff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallBreak: {fileID: 0}
 --- !u!1001 &662667406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20599,6 +20602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b4e204a89ab844b8cfc0d016ccff62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallBreak: {fileID: 0}
 --- !u!23 &1573357409553822597
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21073,6 +21077,7 @@ MonoBehaviour:
   invlunTime: 0
   lastHit: 0
   isDead: 0
+  sliderObject: {fileID: 0}
   ouch: {fileID: 0}
   dying: {fileID: 0}
 --- !u!1 &2056744843961725721
