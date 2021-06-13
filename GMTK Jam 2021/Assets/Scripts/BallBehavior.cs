@@ -7,16 +7,16 @@ public class BallBehavior : MonoBehaviour
     // magnitude and direction in here
     public Vector3 velocity;
     public Rigidbody rigidBody;
-    
+
     // the amount of damage (speed) needed to destory an object
     public float thresholdForBreakingObjects;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        
+
         // we immediatly squre the threshold because we are using Vector3 sqrMagnitude to compare
         // because it's faster
         thresholdForBreakingObjects = thresholdForBreakingObjects * thresholdForBreakingObjects;
@@ -27,25 +27,26 @@ public class BallBehavior : MonoBehaviour
     {
         velocity = rigidBody.velocity;
     }
-    
+
     void OnCollisionEnter(Collision other)
     {
         int numContacts = other.contactCount;
         //Debug.Log("there are " + numContacts + " contact points!");
         Collider objectCollider, ballCollider;
         float ballVelocitySqr;
-        
-        for (int i = 0; i < numContacts; i++) {
+
+        for (int i = 0; i < numContacts; i++)
+        {
             objectCollider = other.GetContact(i).thisCollider;
             ballCollider = other.GetContact(i).otherCollider;
             ballVelocitySqr = ballCollider.attachedRigidbody.velocity.sqrMagnitude;
-            
+
             //Debug.Log("objectCollider.tag: " + objectCollider.tag);
             //Debug.Log("ballCollider.tag: " + ballCollider.tag);
-            
+
             if (objectCollider.tag == "BreakableObject") // check for breakable object
             {
-                if (ballVelocitySqr > thresholdForBreakingObjects) 
+                if (ballVelocitySqr > thresholdForBreakingObjects)
                 {
                     objectCollider.GetComponent<Break>().isBroken = true;
                 }
@@ -56,11 +57,11 @@ public class BallBehavior : MonoBehaviour
             }
             else if (objectCollider.tag == "Bullet") // check for bullets
             {
-                
+
             }
             else if (objectCollider.tag == "Player") // check for the player
             {
-                
+
             }
         }
     }

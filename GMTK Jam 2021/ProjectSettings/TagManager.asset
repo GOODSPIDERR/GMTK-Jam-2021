@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Guard
   - Ball
+  - Key
   layers:
   - Default
   - TransparentFX
