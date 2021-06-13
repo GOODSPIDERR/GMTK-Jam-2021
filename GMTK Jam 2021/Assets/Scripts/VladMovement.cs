@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class VladMovement : MonoBehaviour
 {
@@ -19,7 +20,10 @@ public class VladMovement : MonoBehaviour
     Animator animator;
     public GameObject ball;
     Rigidbody ballRb;
+
     public AudioSource keySound;
+    public TMP_Text keyCounterText;
+
     void Start()
 
     {
@@ -88,6 +92,13 @@ public class VladMovement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        UpdateKeyCounter();
+    }
+
+    public void UpdateKeyCounter()
+    {
+        keyCounterText.text = "Keys:" + keyCounter;
     }
 
     void OnDrawGizmos()
