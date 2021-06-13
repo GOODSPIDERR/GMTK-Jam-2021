@@ -32,11 +32,10 @@ public class VladMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         ballRb = ball.GetComponent<Rigidbody>();
-        keySound = GetComponent<AudioSource>();
         playerRB = GetComponent<Rigidbody>();
         angularVelocity = playerRB.angularVelocity;
 
-         //ball is 6.38 metres away
+        //ball is 6.38 metres away
 
     }
 
