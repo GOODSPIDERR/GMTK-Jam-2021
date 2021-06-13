@@ -98,7 +98,7 @@ public class VladMovement : MonoBehaviour
 
     public void UpdateKeyCounter()
     {
-        keyCounterText.text = "Keys:" + keyCounter;
+        keyCounterText.text = "Keys: " + keyCounter + "/5";
     }
 
     void OnDrawGizmos()
