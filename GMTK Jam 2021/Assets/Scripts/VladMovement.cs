@@ -77,6 +77,10 @@ public class VladMovement : MonoBehaviour
             direction = transform.position - ball.transform.position;
             ballRb.AddForce(-transform.right * 100f, ForceMode.Force);
         }
+        if (transform.position.y < -10f) //if you fall off
+        {
+            transform.position = new Vector3(-70.6f, 22, 267.8f); //spawn at starting position
+        }
 
 
         velocity.y += gravity * Time.deltaTime;
