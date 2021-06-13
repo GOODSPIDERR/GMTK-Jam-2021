@@ -258,6 +258,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6345f5713a1f9f242b5c49cec4b6dd8b, type: 3}
+--- !u!1 &12976345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3065863210720872033, guid: 6345f5713a1f9f242b5c49cec4b6dd8b, type: 3}
+  m_PrefabInstance: {fileID: 12976344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &12976346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12976345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7251b230ab909fa40a6d7efeea9b7c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  curHealth: 100
+  regenSpeed: 2
+  shouldRegenHP: 1
+  lastHit: 0
+  invlunTime: 0
+  HPBar: {fileID: 1340609580}
+  ouch: {fileID: 0}
+  dying: {fileID: 0}
 --- !u!1 &20117489
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +317,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -5.6050014, y: 0}
+  m_SizeDelta: {x: -23.809998, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &22568609
 PrefabInstance:
