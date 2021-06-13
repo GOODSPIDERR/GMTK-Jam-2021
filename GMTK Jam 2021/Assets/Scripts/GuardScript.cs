@@ -6,10 +6,10 @@ using System;
 
 public class GuardScript : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private GameObject enemy;
+    private NavMeshAgent guard;
+    private GameObject player;
     //private FirstPersonController fpc;
-    private Rigidbody erb;
+    private Rigidbody rb;
     public float hearingRange, spottingRange, spottingAngle, pushForce;
     private bool agro, attack;
     Animator guardAnim;
@@ -17,10 +17,9 @@ public class GuardScript : MonoBehaviour
     void Start()
     {
         agro = attack = false;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        enemy = GameObject.FindGameObjectWithTag("Player");
-        //fpc = enemy.GetComponent<FirstPersonController>();
-        erb = enemy.GetComponent<Rigidbody>();
+        guard = gameObject.GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = player.GetComponent<Rigidbody>();
         guardAnim = GetComponent<Animator>();
 
     }
@@ -29,15 +28,15 @@ public class GuardScript : MonoBehaviour
     {
         if (agro)
         {
-            if (hearing() > hearingRange && !spotting()) //fpc.getCrouch() &&
+            if (hearing() > hearingRange && !spotting()) 
             {
                 agro = false;
                 guardAnim.SetBool("agro", false);
-                agent.SetDestination(transform.position);
+                guard.SetDestination(transform.position);
             }
             else
             {
-                agent.SetDestination(enemy.transform.position);
+                guard.SetDestination(player.transform.position);
                 if (hearing() <= 1)
                 {
                     attack = true;
@@ -46,38 +45,35 @@ public class GuardScript : MonoBehaviour
         }
         else
         {
-            //if (fpc.getSprint())
-            //{
+  
                 if (hearing() < (1.5 * hearingRange))
                 {
                     agro = true;
                     guardAnim.SetBool("agro", true);
-                    agent.SetDestination(enemy.transform.position);
+                    guard.SetDestination(player.transform.position);
                 }
-            //}
-            //else if (fpc.getCrouch())
-           // {
+
                 if (hearing() < (0.5 * hearingRange))
                 {
                     agro = true;
                     guardAnim.SetBool("agro", true);
-                    agent.SetDestination(enemy.transform.position);
+                    guard.SetDestination(player.transform.position);
                 }
-           // }
+           
             else
             {
                 if (hearing() < hearingRange)
                 {
                     agro = true;
                     guardAnim.SetBool("agro", true);
-                    agent.SetDestination(enemy.transform.position);
+                    guard.SetDestination(player.transform.position);
                 }
             }
             if (spotting() && hearing() < spottingRange)
             {
                 agro = true;
                 guardAnim.SetBool("agro", true);
-                agent.SetDestination(enemy.transform.position);
+                guard.SetDestination(player.transform.position);
             }
         }
     }
@@ -94,8 +90,8 @@ public class GuardScript : MonoBehaviour
     double hearing()
     {
         double x, z, dist;
-        x = transform.position.x - enemy.transform.position.x;
-        z = transform.position.z - enemy.transform.position.z;
+        x = transform.position.x - player.transform.position.x;
+        z = transform.position.z - player.transform.position.z;
         x = x * x;
         z = z * z;
         dist = Math.Sqrt(x + z);
@@ -104,7 +100,7 @@ public class GuardScript : MonoBehaviour
 
     bool spotting()
     {
-        Vector3 targetDir = enemy.transform.position - transform.position;
+        Vector3 targetDir = player.transform.position - transform.position;
         float angle = Vector3.Angle(targetDir, transform.forward);
 
         int layerMask = 1 << 6;
@@ -128,9 +124,9 @@ public class GuardScript : MonoBehaviour
 
     void knockback()
     {
-        Vector3 targetDir = enemy.transform.position - transform.position;
+        Vector3 targetDir = player.transform.position - transform.position;
         targetDir.y = 0;
-        erb.AddForce(targetDir.normalized * pushForce, ForceMode.Impulse);
+        rb.AddForce(targetDir.normalized * pushForce, ForceMode.Impulse);
 
     }
 }
