@@ -14,14 +14,17 @@ public class VladMovement : MonoBehaviour
     public LayerMask groundMask;
     public float movementSpeed = 5f;
     Vector3 velocity;
+    int keyCounter = 0;
     public bool isGrounded;
     Animator animator;
     public GameObject ball;
+    Rigidbody ballRb;
     void Start()
 
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        ballRb = ball.GetComponent<Rigidbody>();
     }
 
 
@@ -46,7 +49,7 @@ public class VladMovement : MonoBehaviour
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed, 0, Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed);
         float movementMagnitude = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), 0, Mathf.Abs(Input.GetAxis("Vertical")));
 
-        //Debug.Log(movementMagnitude);
+        Debug.Log(movementMagnitude);
 
         controller.Move(movement);
 
@@ -68,11 +71,12 @@ public class VladMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            transform.Rotate(0.0f, 45F, 0.0f, Space.Self);
-            //ball.transform.Rotate(0.0f, 45F, 0.0f, Space.Self);
-            ball.transform.RotateAround(transform.position, Vector3.up, 20 * Time.deltaTime);
+            transform.Rotate(0f, 720f * Time.deltaTime, 0f, Space.Self);
+            //ball.transform.Rotate(0f, 360f * Time.deltaTime, 0f, Space.World);
+            Vector3 direction;
+            direction = transform.position - ball.transform.position;
+            ballRb.AddForce(-transform.right * 100f, ForceMode.Force);
         }
-
 
 
         velocity.y += gravity * Time.deltaTime;
@@ -83,5 +87,14 @@ public class VladMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position, groundDistance);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Key")
+        {
+            keyCounter++;
+            Destroy(other.gameObject);
+        }
     }
 }
