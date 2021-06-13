@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (Health <= 0f)
         {
-            soundEffects.EnemyDies();
+            //soundEffects.EnemyDies();
             Die();
         }
         // Debug.Log(Health);
@@ -64,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                soundEffects.EnemyHit();
+                //soundEffects.EnemyHit();
                 Health -= damage;
 
             }
