@@ -9,22 +9,23 @@ public class HealthSystem : MonoBehaviour
 {
     public float maxHealth;
     public float curHealth;
-    
+
     // HP per second
     public float regenSpeed = 2f;
-    
+
     public bool shouldRegenHP = true;
-    
+
     public float lastHit;
     public float invlunTime;
-    
+
     public Image HPBar;
-    
+
     CinemachineVirtualCamera mainCamera;
 
     public AudioSource ouch;
     public AudioSource dying;
-    
+    public AudioSource metalCling;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class HealthSystem : MonoBehaviour
     {
         TryHealing();
     }
-    
+
     public void tryToDamage(float damage)
     {
         if (Time.time > lastHit + invlunTime)
@@ -55,7 +56,7 @@ public class HealthSystem : MonoBehaviour
             }
         }
     }
-    
+
     void TryHealing()
     {
         if (Time.time > lastHit + invlunTime && curHealth < maxHealth)
@@ -69,12 +70,12 @@ public class HealthSystem : MonoBehaviour
             }
         }
     }
-    
+
     void UpdateUIHealth()
     {
         HPBar.fillAmount = curHealth / maxHealth;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Player hit soemthing!");
@@ -89,7 +90,10 @@ public class HealthSystem : MonoBehaviour
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
 
             ShakeCamera(otherRb.velocity.magnitude / 2, 0.5f);
-			lastHit = Time.time;
+            lastHit = Time.time;
+
+            metalCling.pitch = Random.Range(0.95f, 1.05f);
+            metalCling.Play();
         }
     }
 

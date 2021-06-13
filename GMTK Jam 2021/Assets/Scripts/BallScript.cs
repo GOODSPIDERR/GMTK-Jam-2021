@@ -13,6 +13,7 @@ public class BallScript : MonoBehaviour
     public LayerMask layerMask;
     public float dragDistance;
     public float activationSpeed = 5f;
+    public AudioSource slideSound;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class BallScript : MonoBehaviour
 
     void Update()
     {
-        sparks.position = new Vector3(transform.position.x, transform.position.y - dragDistance, transform.position.z);
+        sparks.position = new Vector3(transform.position.x, transform.position.y - 0.75f, transform.position.z);
         sparks.rotation = Quaternion.LookRotation(rb.velocity);
 
         Debug.DrawRay(transform.position, Vector3.down * dragDistance, Color.yellow);
@@ -37,11 +38,14 @@ public class BallScript : MonoBehaviour
             {
                 //Debug.Log(hit.transform.name);
                 isSliding = true;
+                slideSound.volume = 0.25f;
+
             }
 
             else
             {
                 isSliding = false;
+                slideSound.volume = 0.0f;
             }
         }
 
@@ -49,6 +53,7 @@ public class BallScript : MonoBehaviour
         else
         {
             isSliding = false;
+            slideSound.volume = 0.0f;
             scrapeTrigger.enabled = false;
         }
 
