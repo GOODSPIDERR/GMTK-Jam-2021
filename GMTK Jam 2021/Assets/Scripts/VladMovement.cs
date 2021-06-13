@@ -14,17 +14,20 @@ public class VladMovement : MonoBehaviour
     public LayerMask groundMask;
     public float movementSpeed = 5f;
     Vector3 velocity;
-    int keyCounter = 0;
+    public int keyCounter = 0;
     public bool isGrounded;
     Animator animator;
     public GameObject ball;
     Rigidbody ballRb;
+    public AudioSource keySound;
     void Start()
 
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         ballRb = ball.GetComponent<Rigidbody>();
+        keySound = GetComponent<AudioSource>();
+
     }
 
 
@@ -97,6 +100,7 @@ public class VladMovement : MonoBehaviour
     {
         if (other.transform.tag == "Key")
         {
+            keySound.Play();
             keyCounter++;
             Destroy(other.gameObject);
         }
