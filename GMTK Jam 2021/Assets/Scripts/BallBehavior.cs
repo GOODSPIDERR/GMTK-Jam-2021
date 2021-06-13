@@ -30,8 +30,9 @@ public class BallBehavior : MonoBehaviour
     
     void OnCollisionEnter(Collision other)
     {
+        Debug.Log("There's been a collision!");
         int numContacts = other.contactCount;
-        //Debug.Log("there are " + numContacts + " contact points!");
+        Debug.Log("there are " + numContacts + " contact points!");
         Collider objectCollider, ballCollider;
         float ballVelocitySqr;
         
@@ -40,8 +41,8 @@ public class BallBehavior : MonoBehaviour
             ballCollider = other.GetContact(i).otherCollider;
             ballVelocitySqr = ballCollider.attachedRigidbody.velocity.sqrMagnitude;
             
-            //Debug.Log("objectCollider.tag: " + objectCollider.tag);
-            //Debug.Log("ballCollider.tag: " + ballCollider.tag);
+            Debug.Log("objectCollider.tag: " + objectCollider.tag);
+            Debug.Log("ballCollider.tag: " + ballCollider.tag);
             
             if (objectCollider.tag == "BreakableObject") // check for breakable object
             {
