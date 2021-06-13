@@ -16,14 +16,18 @@ public class FinalDoorScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (playerScript.keyCounter == 5)
+        if (other.transform.tag == "Player")
         {
-            Destroy(gameObject);
+            if (playerScript.keyCounter == 5)
+            {
+                Destroy(gameObject);
+            }
+            if (playerScript.keyCounter < 5)
+            {
+                StartCoroutine(NotEnoughKeys(3));
+            }
         }
-        if (playerScript.keyCounter < 5)
-        {
-            StartCoroutine(NotEnoughKeys(3));
-        }
+
     }
 
 

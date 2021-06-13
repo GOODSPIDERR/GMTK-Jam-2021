@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using DG.Tweening;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class EnemyHealth : MonoBehaviour
 {
     public float Health = 100f;
@@ -21,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     CinemachineVirtualCamera mainCamera;
     public GameObject sliderObject;
     Slider slider;
+    public bool finalBoss;
     [SerializeField] SoundEffectManagerScript soundEffects;
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class EnemyHealth : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
         slider = sliderObject.GetComponent<Slider>();
         soundEffects = FindObjectOfType<SoundEffectManagerScript>();
-        
+
     }
 
     // Update is called once per frame
@@ -107,5 +109,18 @@ public class EnemyHealth : MonoBehaviour
         guardScript.enabled = false;
         sliderObject.SetActive(false);
         Destroy(gameObject, 5);
+
+        if (finalBoss)
+        {
+            StartCoroutine("SceneMigration");
+        }
     }
+
+    IEnumerator SceneMigration()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+
 }
