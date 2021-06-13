@@ -55,10 +55,7 @@ public class BallBehavior : MonoBehaviour
             {
                 objectCollider.GetComponent<EnemyHealth>().tryToDamage(Mathf.Sqrt(ballVelocitySqr));
             }
-            else if (objectCollider.tag == "Bullet") // check for bullets
-            {
-
-            }
+           
             else if (objectCollider.tag == "Player") // check for the player
             {
 

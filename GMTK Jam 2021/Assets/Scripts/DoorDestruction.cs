@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorDestruction : MonoBehaviour
 {
-    public GameObject wallBreak;
+    //public GameObject wallBreak;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class DoorDestruction : MonoBehaviour
     {
         if (other.transform.tag == "Ball")
         {
-            Instantiate(wallBreak, transform.position, Quaternion.Euler(0, 135f, 0));
+            //Instantiate(wallBreak, transform.position, Quaternion.Euler(0, 135f, 0));
             Destroy(gameObject);
         }
     }
