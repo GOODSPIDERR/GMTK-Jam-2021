@@ -87,7 +87,7 @@ public class EnemyHealth : MonoBehaviour
             //shakeSequence.Append(mainCamera.DOLocalMove(currentCameraPosition, 0.5f, false));
             //shakeSequence.Play();
 
-            ShakeCamera(otherRb.velocity.magnitude / 2, 0.5f);
+            ShakeCamera(otherRb.velocity.magnitude / 3, 0.5f);
         }
     }
 
