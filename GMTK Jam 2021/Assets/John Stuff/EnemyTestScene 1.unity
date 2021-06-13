@@ -277,6 +277,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ballrog_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8910170135155697130, guid: 6345f5713a1f9f242b5c49cec4b6dd8b, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8910170135155697130, guid: 6345f5713a1f9f242b5c49cec4b6dd8b, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6345f5713a1f9f242b5c49cec4b6dd8b, type: 3}
 --- !u!1 &402552532 stripped
