@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     BoxCollider collider;
     NavMeshAgent navMesh;
     GuardScript guardScript;
-    public CinemachineVirtualCamera mainCamera;
+    CinemachineVirtualCamera mainCamera;
 
     // Start is called before the first frame update
     void Start()
