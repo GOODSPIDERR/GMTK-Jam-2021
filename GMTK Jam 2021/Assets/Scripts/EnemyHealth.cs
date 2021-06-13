@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
+using Cinemachine;
 public class EnemyHealth : MonoBehaviour
 {
     public float Health = 100f;
@@ -15,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     BoxCollider collider;
     NavMeshAgent navMesh;
     GuardScript guardScript;
+    public CinemachineVirtualCamera mainCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
         collider = GetComponent<BoxCollider>();
         navMesh = GetComponent<NavMeshAgent>();
         guardScript = GetComponent<GuardScript>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
     }
 
     // Update is called once per frame
@@ -64,7 +68,23 @@ public class EnemyHealth : MonoBehaviour
 
             Vector3 direction = transform.position - other.transform.position;
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
+
+            //Vector3 currentCameraPosition = mainCamera.localPosition;
+            //Sequence shakeSequence = DOTween.Sequence();
+            //shakeSequence.Append(mainCamera.DOShakePosition(otherRb.velocity.magnitude / 10, otherRb.velocity.magnitude / 5, 5, 10f, false, true));
+            //shakeSequence.Append(mainCamera.DOLocalMove(currentCameraPosition, 0.5f, false));
+            //shakeSequence.Play();
+
+            ShakeCamera(otherRb.velocity.magnitude / 2, 0.5f);
         }
+    }
+
+    public void ShakeCamera(float intensity, float timer)
+    {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = mainCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        DOTween.To(() => cinemachineBasicMultiChannelPerlin.m_AmplitudeGain, x => cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = x, 0f, timer);
     }
 
     void Die()
