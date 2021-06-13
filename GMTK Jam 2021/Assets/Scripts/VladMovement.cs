@@ -36,6 +36,8 @@ public class VladMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        Debug.Log(velocity.y);
+
         animator.SetBool("isGrounded", isGrounded);
 
         Debug.Log(isGrounded);
