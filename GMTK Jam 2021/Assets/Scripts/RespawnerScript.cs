@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RespawnerScript : MonoBehaviour
 {
-    public GameObject quitObject;
+ 
 
     void Start()
     {
@@ -15,10 +15,6 @@ public class RespawnerScript : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("escape"))
-        {
-            quitObject.SetActive(true); //displays quit confirmation 
-        }
 
         if (transform.position.y < -100f) //if you fall off
         {

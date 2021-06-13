@@ -6,6 +6,7 @@ public class SoundEffectManagerScript : MonoBehaviour
 {
     AudioSource soundPlayer;
     public AudioClip[] soundEffects;
+    public GameObject quitObject;
     void Start()
     {
         soundPlayer = GetComponent<AudioSource>();
@@ -31,8 +32,11 @@ public class SoundEffectManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
+        if (Input.GetKeyDown("escape"))
+        {
+            quitObject.SetActive(true); //displays quit confirmation 
+        }
 
 
 
