@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 using Cinemachine;
+using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     public float Health = 100f;
@@ -18,6 +19,8 @@ public class EnemyHealth : MonoBehaviour
     NavMeshAgent navMesh;
     GuardScript guardScript;
     CinemachineVirtualCamera mainCamera;
+    public GameObject sliderObject;
+    Slider slider;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         navMesh = GetComponent<NavMeshAgent>();
         guardScript = GetComponent<GuardScript>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -65,6 +69,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
             Health -= otherRb.velocity.magnitude;
+            slider.value = Health;
 
             Vector3 direction = transform.position - other.transform.position;
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
@@ -94,6 +99,7 @@ public class EnemyHealth : MonoBehaviour
         collider.enabled = false;
         navMesh.enabled = false;
         guardScript.enabled = false;
+        sliderObject.SetActive(false);
         Destroy(gameObject, 5);
     }
 }
