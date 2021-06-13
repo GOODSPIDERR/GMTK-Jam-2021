@@ -16,7 +16,10 @@ public class HealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (maxHealth != curHealth)
+        {
+            curHealth = maxHealth;
+        }
     }
 
     // Update is called once per frame
