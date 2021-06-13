@@ -12,6 +12,7 @@ public class BallScript : MonoBehaviour
     public SphereCollider scrapeTrigger;
     public LayerMask layerMask;
     public float dragDistance;
+    public float activationSpeed = 5f;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class BallScript : MonoBehaviour
 
         Debug.DrawRay(transform.position, Vector3.down * dragDistance, Color.yellow);
 
-        if (rb.velocity.magnitude >= 5f)
+        if (rb.velocity.magnitude >= activationSpeed)
         {
             scrapeTrigger.enabled = true;
 

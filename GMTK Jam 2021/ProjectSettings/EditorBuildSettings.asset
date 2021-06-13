@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/1. MainMenu/1. MainMenu.unity
     guid: 578e793c315bba7449000671ccb9c41a
   - enabled: 1
-    path: Assets/Scenes/VladMovement.unity
-    guid: e491140d99ce8874b908c64eae1fb5ce
+    path: Assets/Scenes/2. MasterScene/Master_Scene.unity
+    guid: ea8714acb28ac81438984cd3e6b8608b
   m_configObjects: {}
