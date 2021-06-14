@@ -29864,6 +29864,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5238615595770398972, guid: 0a142488473a71b4b8454c07d137303f, type: 3}
+      propertyPath: keyCounter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238615595770398972, guid: 0a142488473a71b4b8454c07d137303f, type: 3}
       propertyPath: keyCounterText
       value: 
       objectReference: {fileID: 293045172}
