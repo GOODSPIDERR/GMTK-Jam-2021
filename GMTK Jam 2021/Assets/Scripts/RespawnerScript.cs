@@ -18,7 +18,7 @@ public class RespawnerScript : MonoBehaviour
             transform.localPosition = new Vector3(0, 10f, 0);
 
 
-        if (transform.localPosition.y < -20f) //if you fall off
+        if (transform.localPosition.y < -30f) //if you fall off
         {
             transform.localPosition = new Vector3(0, 10f, 0); //spawn back to beginning
         }
