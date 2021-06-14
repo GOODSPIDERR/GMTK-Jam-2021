@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -11,37 +12,39 @@ public class HealthSystem : MonoBehaviour
     public float curHealth;
 
     // HP per second
-    public float regenSpeed = 2f;
+    public float regenSpeed = 1f;
 
     public bool shouldRegenHP = true;
 
     public float lastHit;
     public float invlunTime;
 
-    public Image HPBar;
-
+    //public Image HPBar;
+    public GameObject sliderObject;
+    Slider slider;
     CinemachineVirtualCamera mainCamera;
 
-    public AudioSource ouch;
-    public AudioSource dying;
     public AudioSource metalCling;
 
     // Start is called before the first frame update
     void Start()
     {
-        ouch = FindObjectOfType<AudioSource>(CompareTag("PlayerOuch"));
-        dying = FindObjectOfType<AudioSource>(CompareTag("PlayerDying"));
         mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
-
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         TryHealing();
+        if (curHealth <= 0f)
+        {
+            //soundEffects.PlayerDies();
+            SceneManager.LoadScene("Master_Scene");
+        }
     }
 
-    public void tryToDamage(float damage)
+    /*public void tryToDamage(float damage)
     {
         if (Time.time > lastHit + invlunTime)
         {
@@ -55,7 +58,8 @@ public class HealthSystem : MonoBehaviour
                 curHealth -= damage;
             }
         }
-    }
+    }*/
+
 
     void TryHealing()
     {
@@ -63,20 +67,32 @@ public class HealthSystem : MonoBehaviour
         {
             // increase health dependant on the time it takes to render a frame
             curHealth += regenSpeed * Time.deltaTime;
-            UpdateUIHealth();
+            slider.value = curHealth;
+            //UpdateUIHealth();
+
             if (curHealth > maxHealth) // don't overheal
             {
                 curHealth = maxHealth;
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Guard")
+        {
 
-    void UpdateUIHealth()
+            curHealth -= 10;
+            slider.value = curHealth;
+            Debug.Log("hitGuard");
+        }
+    }
+     /*   void UpdateUIHealth()
     {
         HPBar.fillAmount = curHealth / maxHealth;
-    }
+    }*/
 
-    private void OnTriggerEnter(Collider other)
+
+    /*private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Player hit soemthing!");
         if (other.transform.tag == "Guard" && Time.time > lastHit + invlunTime)
@@ -84,7 +100,7 @@ public class HealthSystem : MonoBehaviour
             Debug.Log("Player hit guard!");
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
             curHealth -= 5;
-            UpdateUIHealth();
+            //UpdateUIHealth();
 
             Vector3 direction = transform.position - other.transform.position;
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
@@ -95,7 +111,7 @@ public class HealthSystem : MonoBehaviour
             metalCling.pitch = Random.Range(0.95f, 1.05f);
             metalCling.Play();
         }
-    }
+    }*/
 
     public void ShakeCamera(float intensity, float timer)
     {

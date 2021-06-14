@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
 
     public float invlunTime;
     public float lastHit;
-
+    private bool hasPlayed = false;
     public bool isDead;
     Animator animator;
     Rigidbody rigidbody;
@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (Health <= 0f)
         {
-            //soundEffects.EnemyDies();
+
             Die();
         }
         // Debug.Log(Health);
@@ -109,6 +109,12 @@ public class EnemyHealth : MonoBehaviour
         guardScript.enabled = false;
         sliderObject.SetActive(false);
         Destroy(gameObject, 5);
+        if (!hasPlayed)
+        {
+            soundEffects.EnemyDies();
+            hasPlayed = true;
+        }
+        
 
         if (finalBoss)
         {

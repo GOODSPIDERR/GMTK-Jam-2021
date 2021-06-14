@@ -7,6 +7,7 @@ public class SoundEffectManagerScript : MonoBehaviour
     AudioSource soundPlayer;
     public AudioClip[] soundEffects;
     public GameObject quitObject;
+
     void Start()
     {
         soundPlayer = GetComponent<AudioSource>();
@@ -18,16 +19,26 @@ public class SoundEffectManagerScript : MonoBehaviour
     }
     public void EnemyDies()
     {
-        soundPlayer.PlayOneShot(soundEffects[2]);
+        soundPlayer.PlayOneShot(soundEffects[1]);
     }
     public void Key()
     {
-        soundPlayer.PlayOneShot(soundEffects[3]);
+        soundPlayer.PlayOneShot(soundEffects[2]);
     }
     public void PlayerDies()
     {
+        soundPlayer.PlayOneShot(soundEffects[3]);
+    }
+    public void FinalDoorCantOpen()
+    {
         soundPlayer.PlayOneShot(soundEffects[4]);
     }
+    public void FinalDoorBreak()
+    {
+        soundPlayer.PlayOneShot(soundEffects[5]);
+    }
+
+
 
     // Update is called once per frame
     void Update()

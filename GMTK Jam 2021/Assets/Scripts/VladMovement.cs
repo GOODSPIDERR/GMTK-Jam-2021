@@ -119,7 +119,7 @@ public class VladMovement : MonoBehaviour
     {
         if (other.transform.tag == "Key")
         {
-            //soundEffects.Key();
+            soundEffects.Key();
             keyCounter++;
             Destroy(other.gameObject);
         }

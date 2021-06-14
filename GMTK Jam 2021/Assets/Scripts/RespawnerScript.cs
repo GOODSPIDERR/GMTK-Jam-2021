@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RespawnerScript : MonoBehaviour
 {
- 
+    Vector3 startPosition;
 
     void Start()
     {
-
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -16,9 +16,9 @@ public class RespawnerScript : MonoBehaviour
     {
 
 
-        if (transform.position.y < -100f) //if you fall off
+        if (startPosition.y < -10f) //if you fall off
         {
-            transform.position = new Vector3(-72.5f, 120.4f, -98.8f); //spawn back to beginning
+            transform.position = new Vector3(0, 0, 0); //spawn back to beginning
         }
 
     }
