@@ -8,17 +8,19 @@ public class RespawnerScript : MonoBehaviour
 
     void Start()
     {
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R)) //Dedicated 'Reset' Key in case of unforseen catasrophies 
+            transform.localPosition = new Vector3(0, 10f, 0);
 
 
-        if (startPosition.y < -10f) //if you fall off
+        if (transform.localPosition.y < -20f) //if you fall off
         {
-            transform.position = new Vector3(0, 0, 0); //spawn back to beginning
+            transform.localPosition = new Vector3(0, 10f, 0); //spawn back to beginning
         }
 
     }
