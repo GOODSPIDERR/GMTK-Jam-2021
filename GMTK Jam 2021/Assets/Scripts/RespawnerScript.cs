@@ -14,15 +14,8 @@ public class RespawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) //Dedicated 'Reset' Key in case of unforseen catasrophies 
+        if (Input.GetKeyDown(KeyCode.R) || transform.localPosition.y < -100f) //Dedicated 'Reset' Key in case of unforseen catasrophies 
             transform.localPosition = new Vector3(0, 10f, 0);
-
-
-        if (transform.localPosition.y < -30f) //if you fall off
-        {
-            transform.localPosition = new Vector3(0, 10f, 0); //spawn back to beginning
-        }
-
     }
 
     public void QuitGame()

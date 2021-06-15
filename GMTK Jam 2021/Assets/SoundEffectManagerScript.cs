@@ -38,18 +38,24 @@ public class SoundEffectManagerScript : MonoBehaviour
         soundPlayer.PlayOneShot(soundEffects[5]);
     }
 
+    public void ImpactSound()
+    {
+        soundPlayer.PlayOneShot(soundEffects[6]);
+    }
+
+    public void PlaySound(int soundIndex, float volume)
+    {
+        soundPlayer.PlayOneShot(soundEffects[soundIndex], volume);
+    }
+
 
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown("escape"))
         {
             quitObject.SetActive(true); //displays quit confirmation 
         }
-
-
-
     }
 }

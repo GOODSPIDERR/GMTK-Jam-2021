@@ -38,7 +38,7 @@ public class BallScript : MonoBehaviour
             {
                 //Debug.Log(hit.transform.name);
                 isSliding = true;
-                slideSound.volume = 0.25f;
+                slideSound.volume = 0.1f;
 
             }
 

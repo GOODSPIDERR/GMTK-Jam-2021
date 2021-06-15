@@ -269,9 +269,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 25
   m_WholeNumbers: 0
-  m_Value: 20
+  m_Value: 25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1733,7 +1733,6 @@ MonoBehaviour:
   isDead: 0
   sliderObject: {fileID: 934775868}
   finalBoss: 0
-  soundEffects: {fileID: 0}
 --- !u!54 &5174980803966087937
 Rigidbody:
   m_ObjectHideFlags: 0

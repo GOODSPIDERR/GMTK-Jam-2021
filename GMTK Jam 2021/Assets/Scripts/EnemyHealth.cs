@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject sliderObject;
     Slider slider;
     public bool finalBoss;
-    [SerializeField] SoundEffectManagerScript soundEffects;
+    SoundEffectManagerScript soundEffects;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,6 @@ public class EnemyHealth : MonoBehaviour
     {
         if (Health <= 0f)
         {
-
             Die();
         }
         // Debug.Log(Health);
@@ -75,20 +74,16 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.transform.tag == "Ball")
         {
+            soundEffects.PlaySound(6, 0.8f);
+
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
-            Health -= otherRb.velocity.magnitude;
+            Health -= otherRb.velocity.magnitude / 3f;
             slider.value = Health;
 
             Vector3 direction = transform.position - other.transform.position;
             otherRb.AddForce(-direction * 30f, ForceMode.VelocityChange);
 
-            //Vector3 currentCameraPosition = mainCamera.localPosition;
-            //Sequence shakeSequence = DOTween.Sequence();
-            //shakeSequence.Append(mainCamera.DOShakePosition(otherRb.velocity.magnitude / 10, otherRb.velocity.magnitude / 5, 5, 10f, false, true));
-            //shakeSequence.Append(mainCamera.DOLocalMove(currentCameraPosition, 0.5f, false));
-            //shakeSequence.Play();
-
-            ShakeCamera(otherRb.velocity.magnitude / 3, 0.5f);
+            ShakeCamera(otherRb.velocity.magnitude / 2, 0.5f);
         }
     }
 
@@ -109,17 +104,25 @@ public class EnemyHealth : MonoBehaviour
         guardScript.enabled = false;
         sliderObject.SetActive(false);
         Destroy(gameObject, 5);
+
         if (!hasPlayed)
         {
-            soundEffects.EnemyDies();
+            if (finalBoss)
+            {
+                soundEffects.PlaySound(7, 1f);
+                StartCoroutine("SceneMigration");
+            }
+
+            else
+            {
+                soundEffects.EnemyDies();
+            }
+
             hasPlayed = true;
         }
-        
 
-        if (finalBoss)
-        {
-            StartCoroutine("SceneMigration");
-        }
+
+
     }
 
     IEnumerator SceneMigration()
