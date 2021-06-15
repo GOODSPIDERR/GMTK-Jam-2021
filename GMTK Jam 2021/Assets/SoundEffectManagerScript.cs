@@ -58,4 +58,9 @@ public class SoundEffectManagerScript : MonoBehaviour
             quitObject.SetActive(true); //displays quit confirmation 
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit(); //called from quit confirmation ui
+    }
 }

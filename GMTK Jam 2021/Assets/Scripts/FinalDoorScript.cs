@@ -10,6 +10,8 @@ public class FinalDoorScript : MonoBehaviour
     [SerializeField] GameObject doorOpen;
     private bool success = false;
     [SerializeField] SoundEffectManagerScript soundEffects;
+    [SerializeField] AudioSource backgroundMusic;
+    public AudioClip endSong;
 
     void Start()
     {
@@ -25,6 +27,8 @@ public class FinalDoorScript : MonoBehaviour
             if (playerScript.keyCounter >= 5) 
             {
                 soundEffects.FinalDoorBreak(); //from sound effect manager
+                backgroundMusic.clip = endSong;
+                backgroundMusic.Play();
                 StartCoroutine(DoorOpen(3)); //sets unlocked door UI to active for 3 secs
                 Destroy(gameObject, 3); //makes the door disappear
             }
