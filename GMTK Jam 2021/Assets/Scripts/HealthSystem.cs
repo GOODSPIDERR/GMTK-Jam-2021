@@ -83,7 +83,7 @@ public class HealthSystem : MonoBehaviour
 
             curHealth -= 10;
             slider.value = curHealth;
-            Debug.Log("hitGuard");
+            //Debug.Log("hitGuard");
         }
     }
      /*   void UpdateUIHealth()

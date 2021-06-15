@@ -25,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
     public bool finalBoss;
     SoundEffectManagerScript soundEffects;
 
-    // Start is called before the first frame update
     void Start()
     {
         lastHit = 0f;
@@ -34,22 +33,20 @@ public class EnemyHealth : MonoBehaviour
         collider = GetComponent<BoxCollider>();
         navMesh = GetComponent<NavMeshAgent>();
         guardScript = GetComponent<GuardScript>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
-        slider = sliderObject.GetComponent<Slider>();
-        soundEffects = FindObjectOfType<SoundEffectManagerScript>();
+        slider = sliderObject.GetComponent<Slider>(); //ref to enemy HP bar
 
+        soundEffects = FindObjectOfType<SoundEffectManagerScript>(); //ref to sound manager
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCameraCM").GetComponent<CinemachineVirtualCamera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Health <= 0f)
         {
             Die();
         }
-        // Debug.Log(Health);
     }
-
 
     public void tryToDamage(float damage)
     {
@@ -63,9 +60,7 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                //soundEffects.EnemyHit();
                 Health -= damage;
-
             }
         }
     }
@@ -74,7 +69,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.transform.tag == "Ball")
         {
-            soundEffects.PlaySound(6, 0.8f);
+            soundEffects.PlaySound(6, 0.8f); 
 
             Rigidbody otherRb = other.GetComponent<Rigidbody>();
             Health -= otherRb.velocity.magnitude / 3f;
@@ -87,10 +82,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void ShakeCamera(float intensity, float timer)
+    public void ShakeCamera(float intensity, float timer)  //Cam shake when hit by ball
     {
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = mainCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         DOTween.To(() => cinemachineBasicMultiChannelPerlin.m_AmplitudeGain, x => cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = x, 0f, timer);
     }
@@ -105,27 +99,22 @@ public class EnemyHealth : MonoBehaviour
         sliderObject.SetActive(false);
         Destroy(gameObject, 5);
 
-        if (!hasPlayed)
+        if (!hasPlayed) //if the "dying" sound effect hasn't played for this enemy yet
         {
             if (finalBoss)
             {
                 soundEffects.PlaySound(7, 1f);
-                StartCoroutine("SceneMigration");
+                StartCoroutine("SceneMigration"); //end scene
             }
-
             else
             {
                 soundEffects.EnemyDies();
             }
-
-            hasPlayed = true;
+            hasPlayed = true; //since this function is called in Update, this ensures 1 play only
         }
-
-
-
     }
 
-    IEnumerator SceneMigration()
+    IEnumerator SceneMigration() 
     {
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

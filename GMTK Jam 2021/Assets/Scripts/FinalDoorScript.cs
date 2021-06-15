@@ -1,53 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FinalDoorScript : MonoBehaviour
 {
     public GameObject[] keys;
     [SerializeField] VladMovement playerScript;
-    [SerializeField] GameObject doorOpen;
     [SerializeField] GameObject needMoreKeys;
+    [SerializeField] GameObject youDidIt;
+    [SerializeField] GameObject doorOpen;
+    private bool success = false;
     [SerializeField] SoundEffectManagerScript soundEffects;
 
     void Start()
     {
-        keys = GameObject.FindGameObjectsWithTag("Key");
-        playerScript = FindObjectOfType<VladMovement>();
-        soundEffects = FindObjectOfType<SoundEffectManagerScript>();
+        keys = GameObject.FindGameObjectsWithTag("Key"); //locats all keys and puts them in array
+        playerScript = FindObjectOfType<VladMovement>(); //ref to player script
+        soundEffects = FindObjectOfType<SoundEffectManagerScript>(); //ref to sound manager 
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player") //If player touches the door
         {
-            if (playerScript.keyCounter >= 5)
+            if (playerScript.keyCounter >= 5) 
             {
-                soundEffects.FinalDoorBreak();
-                StartCoroutine(DoorOpen(3));
-                Destroy(gameObject, 3);
+                soundEffects.FinalDoorBreak(); //from sound effect manager
+                StartCoroutine(DoorOpen(3)); //sets unlocked door UI to active for 3 secs
+                Destroy(gameObject, 3); //makes the door disappear
             }
             if (playerScript.keyCounter < 5)
             {
-                soundEffects.FinalDoorCantOpen();
-                StartCoroutine(NotEnoughKeys(3));
+                soundEffects.FinalDoorCantOpen(); //from sound effect manager 
+                StartCoroutine(NotEnoughKeys(3)); //sets not enough keys UI to active for 3 secs
             }
         }
 
     }
-
-
     IEnumerator NotEnoughKeys(float seconds)
     {
         float counter = seconds;
         while (counter > 0)
         {
             yield return new WaitForSeconds(1);
-            needMoreKeys.SetActive(true);
+            needMoreKeys.SetActive(true); //displays UI 
 
             counter--;
         }
-        needMoreKeys.SetActive(false);
+        needMoreKeys.SetActive(false); //turns it back off 
     }
 
     IEnumerator DoorOpen(float seconds)
@@ -56,15 +55,31 @@ public class FinalDoorScript : MonoBehaviour
         while (counter > 0)
         {
             yield return new WaitForSeconds(1);
-            doorOpen.SetActive(true);
+            doorOpen.SetActive(true); //displays UI 
 
             counter--;
         }
-        doorOpen.SetActive(false);
+        doorOpen.SetActive(false); //turns it back off 
     }
-    // Update is called once per frame
-    void Update()
+    /*public void CheckForSuccess() //I'll fix this later
     {
-
+        if (playerScript.keyCounter == 5) success = true;
+        StartCoroutine(All5Keys(3));
+        success = false;
     }
-}
+
+    IEnumerator All5Keys(float seconds)
+    {
+        float counter = seconds;
+        while (counter > 0 && success)
+        {
+            yield return new WaitForSeconds(1);
+            youDidIt.SetActive(true); //displays UI 
+            counter--;
+        }
+        success = false;
+        youDidIt.SetActive(false); //turns it back off 
+        
+    }*/
+
+} 

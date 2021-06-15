@@ -24,6 +24,7 @@ public class VladMovement : MonoBehaviour
     Vector3 angularVelocity;
     [SerializeField] SoundEffectManagerScript soundEffects;
 
+
     public TMP_Text keyCounterText;
 
     void Start()
@@ -66,20 +67,20 @@ public class VladMovement : MonoBehaviour
 
         controller.Move(movement);
 
-        if (movementMagnitude >= 0.1f)
+        if (movementMagnitude >= 0.1f) 
         {
-            animator.SetBool("isMoving", true);
+            animator.SetBool("isMoving", true); //starts run animation
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movement), 0.5f);
         }
         else
         {
-            animator.SetBool("isMoving", false);
+            animator.SetBool("isMoving", false); //idle animation 
         }
 
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded) //if he is on the ground
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity); 
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -92,13 +93,7 @@ public class VladMovement : MonoBehaviour
             ball.transform.rotation *= Quaternion.Euler(transform.InverseTransformVector(angularVelocity) * Mathf.Rad2Deg * Time.fixedDeltaTime);
 
         }
-        if (transform.position.y < -10f) //if you fall off
-        {
-            transform.position = new Vector3(-70.6f, 22, 267.8f); //spawn at starting position
-        }
-
-
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime; 
         controller.Move(velocity * Time.deltaTime);
 
         UpdateKeyCounter();
@@ -106,7 +101,15 @@ public class VladMovement : MonoBehaviour
 
     public void UpdateKeyCounter()
     {
-        keyCounterText.text = "Keys: " + keyCounter + "/5";
+        if (keyCounter <= 5)
+        {
+            keyCounterText.text = "Keys: " + keyCounter + "/5";
+        }
+        if (keyCounter > 5)
+        {
+            keyCounterText.text = "Keys: " + keyCounter + "/" + keyCounter;
+        }
+
     }
 
     void OnDrawGizmos()
@@ -115,13 +118,13 @@ public class VladMovement : MonoBehaviour
         Gizmos.DrawSphere(transform.position, groundDistance);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //makes key disappear when found
     {
         if (other.transform.tag == "Key")
         {
-            soundEffects.Key();
+            soundEffects.Key(); //key sound plays from sound effect manager
             keyCounter++;
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); 
         }
     }
 }
