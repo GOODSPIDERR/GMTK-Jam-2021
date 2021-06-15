@@ -25,7 +25,7 @@ public class FinalDoorScript : MonoBehaviour
             {
                 soundEffects.FinalDoorBreak();
                 StartCoroutine(DoorOpen(3));
-                Destroy(gameObject);
+                Destroy(gameObject, 3);
             }
             if (playerScript.keyCounter < 5)
             {
