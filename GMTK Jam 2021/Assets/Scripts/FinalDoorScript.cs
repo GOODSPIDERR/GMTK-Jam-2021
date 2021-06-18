@@ -12,12 +12,15 @@ public class FinalDoorScript : MonoBehaviour
     [SerializeField] SoundEffectManagerScript soundEffects;
     [SerializeField] AudioSource backgroundMusic;
     public AudioClip endSong;
+    private Animator anim;
 
     void Start()
     {
         keys = GameObject.FindGameObjectsWithTag("Key"); //locats all keys and puts them in array
         playerScript = FindObjectOfType<VladMovement>(); //ref to player script
         soundEffects = FindObjectOfType<SoundEffectManagerScript>(); //ref to sound manager 
+        anim = GetComponent<Animator>();
+
 
     }
     private void OnTriggerEnter(Collider other)
@@ -29,8 +32,9 @@ public class FinalDoorScript : MonoBehaviour
                 soundEffects.FinalDoorBreak(); //from sound effect manager
                 backgroundMusic.clip = endSong;
                 backgroundMusic.Play();
+                anim.SetTrigger("doorOpen");
                 StartCoroutine(DoorOpen(3)); //sets unlocked door UI to active for 3 secs
-                Destroy(gameObject, 3); //makes the door disappear
+                Destroy(gameObject, 2.8f); //makes the door disappear
             }
             if (playerScript.keyCounter < 5)
             {
