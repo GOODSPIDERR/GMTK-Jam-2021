@@ -27618,6 +27618,10 @@ PrefabInstance:
       propertyPath: backgroundMusic
       value: 
       objectReference: {fileID: 335823857}
+    - target: {fileID: 4951223547396273425, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_Size.z
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
 --- !u!4 &1308813333778976788
