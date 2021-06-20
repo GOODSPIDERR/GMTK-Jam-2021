@@ -22574,6 +22574,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3959075476843439929, guid: 29efca51f8233e84e834c45a8b17043a, type: 3}
+--- !u!64 &1444256245 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 2765615647412992867, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+  m_PrefabInstance: {fileID: 1250646207769082817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1449489154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3970957455701765472, guid: 29efca51f8233e84e834c45a8b17043a, type: 3}
@@ -27554,6 +27559,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1046070345}
     m_Modifications:
+    - target: {fileID: 229505451320223004, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98021
+      objectReference: {fileID: 0}
+    - target: {fileID: 229505451320223004, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 229505451320223004, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 368642857270464619, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 368642857270464619, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2380488542621188686, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
       propertyPath: m_Name
       value: Animated Final Door
@@ -27607,6 +27632,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 636576761}
     - target: {fileID: 4721445470266085497, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: ad5de91388e506e488053a99689d1b3b, type: 2}
+    - target: {fileID: 4721445470266085497, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
       propertyPath: youDidIt
       value: 
       objectReference: {fileID: 450295124}
@@ -27618,6 +27647,10 @@ PrefabInstance:
       propertyPath: backgroundMusic
       value: 
       objectReference: {fileID: 335823857}
+    - target: {fileID: 4721445470266085497, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
+      propertyPath: doorMeshCollider
+      value: 
+      objectReference: {fileID: 1444256245}
     - target: {fileID: 4951223547396273425, guid: a00f1529d9dcb664a86f0d1f5ddd99fa, type: 3}
       propertyPath: m_Size.z
       value: 20
@@ -30139,7 +30172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5238615595770398972, guid: 0a142488473a71b4b8454c07d137303f, type: 3}
       propertyPath: keyCounter
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5238615595770398972, guid: 0a142488473a71b4b8454c07d137303f, type: 3}
       propertyPath: keyCounterText
